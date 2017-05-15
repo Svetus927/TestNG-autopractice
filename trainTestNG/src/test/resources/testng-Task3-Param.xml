@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite including Task3" verbose="1" >
+    <test name="Test1">
+        <parameter name="homeDir" value="C://" ></parameter>
+        <parameter name="tempDir" value="TestNG_Task3"></parameter>
+        <packages>
+            <package name="trainTestNG" />
+        </packages>
+    </test>
+  <!--  <test name="Guestlogin">
+        <parameter name="username" value="guest" ></parameter>
+        <parameter name="password" value="guest"></parameter>
+        <packages>
+            <package name="trainTestNG" />
+        </packages>
+    </test> -->
+
+</suite>

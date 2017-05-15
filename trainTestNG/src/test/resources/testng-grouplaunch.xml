@@ -1,0 +1,32 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- Практическое задание №4
+Добавьте в созданный проект конфигурационный файл, который описывает созданные Вами тесты
+Убедитесь, что созданный конфигурационный файл запускается в среде разработки
+Доработайте проект maven так, чтобы запускался созданный конфигурационный файл и убедитесь, что тесты запускаются в консоли
+Укажите у позитивных тестов, что они входят в группу "positive", а и у негативных тестов - что они входят в группу "negative"
+Измените конфигурационный файл таким образом, чтобы позитивные тесты гарантированно запускались раньше негативных.
+
+КОММЕНТАРИЙ:  Вместо групп позитив и негатив, я использовала другие названия, делая маркировку по группам у класса,
+ потому что самих тестов задания 3 стоят маркировки по dataprovider.
+
+-->
+
+<suite name="Suite1" verbose="1" >
+    <test name="Task3_Task4"   >
+        <parameter name="homeDir" value="C://" ></parameter>
+        <parameter name="tempDir" value="TestNG_Task3"></parameter>
+        <groups>
+            <run>
+                <include name="task3"></include>
+                <include name="loadFromFile"></include>
+            </run>
+            <dependencies>
+                <group name="task3" depends-on="loadFromFile"></group>
+            </dependencies>
+
+        </groups>
+        <packages>
+            <package name="trainTestNG" />
+        </packages>
+    </test>
+</suite>
