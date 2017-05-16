@@ -39,6 +39,23 @@ public class DataProviders {
         return data.iterator();
     }
 
+    @DataProvider  // исп  в CreateNewFileTask3, negative testing
+    public static Iterator<Object[]> loadNegativeFromFile() throws IOException {
+        BufferedReader bufReader = new BufferedReader(new InputStreamReader(
+                DataProviders.class.getResourceAsStream("/negativeFileNames.data")));
+
+        List<Object[]> userData = new ArrayList<Object[]>();
+        String line = bufReader.readLine();
+        while (line != null) {
+            userData.add(new Object[]{line});
+            line = bufReader.readLine();
+        }
+
+        bufReader.close();
+
+        return userData.iterator();
+    }
+
     @DataProvider
     public static Iterator<Object[]> loadUserFromFile() throws IOException {
         BufferedReader bufReader = new BufferedReader(new InputStreamReader(
@@ -48,7 +65,6 @@ public class DataProviders {
         String line = bufReader.readLine();
         while (line != null) {
             userData.add(line.split(";"));
-
             line = bufReader.readLine();
         }
 

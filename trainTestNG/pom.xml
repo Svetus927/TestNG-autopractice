@@ -54,11 +54,11 @@
 		<artifactId>maven-surefire-plugin</artifactId>
 		<version>2.17</version>
        <configuration>  <!--  Для выполнения только опр. тестового сьюта описанного в файле xml -->
-    <!--        <includes>
+         <!-- <includes>
                     <include> **/*.Test1.java </include>
             </includes>  -->
            <suiteXmlFiles>
-                <suiteXmlFile>src\test\resources\testng-grouplaunch.xml </suiteXmlFile>
+                <suiteXmlFile>src\test\resources\testng-Task3-Param.xml </suiteXmlFile>
             </suiteXmlFiles>
         </configuration>
 	</plugin>

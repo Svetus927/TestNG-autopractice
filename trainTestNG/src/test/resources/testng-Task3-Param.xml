@@ -2,11 +2,12 @@
 
 <suite name="Suite including Task3" verbose="1" >
     <test name="Test1">
-        <parameter name="homeDir" value="C://" ></parameter>
-        <parameter name="tempDir" value="TestNG_Task3"></parameter>
-        <packages>
-            <package name="trainTestNG" />
-        </packages>
+        <parameter name="homeDir" value="C://tmp//" ></parameter>
+        <parameter name="tempDir" value="TestNG_Task3_"></parameter>
+        <classes>
+            <class name="trainTestNG.CreateNewFileTask3" ></class>
+        </classes>
+
     </test>
   <!--  <test name="Guestlogin">
         <parameter name="username" value="guest" ></parameter>

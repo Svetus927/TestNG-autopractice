@@ -53,29 +53,35 @@ public Path parentPath; // пасс к созданной временной д�
 
   // **----------пример использования параметров для @Test (dataProvider )--------------*//
 
-    @Test(dataProviderClass = DataProviders.class, dataProvider = "PathPositive")
+  @Test(dataProviderClass = DataProviders.class, dataProvider = "PathPositive")
     public void existingPathTest(String strPath) throws IOException {
 
         File file = new File(String.valueOf(parentPath),strPath);
 
        Assert.assertTrue(file.createNewFile(), "createnewFile should be True for file!");
-       System.out.println("File created successfully. Its name: "+strPath);
+       System.out.println("File created successfully. The name: "+strPath);
 
        Assert.assertTrue(!file.createNewFile(), "createNewFile should be False for the second time!");
         Files.delete(Paths.get(file.getPath()));
 
     }
 
-    @Test(dataProviderClass = DataProviders.class, dataProvider = "PathNegative")//(enabled = false)
+    //@Test(dataProviderClass = DataProviders.class, dataProvider = "PathNegative")//(enabled = false)
+    @Test(dataProviderClass =  DataProviders.class,dataProvider ="loadNegativeFromFile")
     public void nonExistingPathTest(String strPath)  {
         File file = new File(String.valueOf(parentPath),strPath);
         try {
-          //  Assert.assertTrue(!(file.createNewFile()), "CreatenewFile should be False for file with name: "+ strPath);
-            AssertJUnit.assertFalse("CreatenewFile should be False for file with name: "+ strPath, file.createNewFile() );
-        } catch (IOException e) {
-            System.out.println("Exception: " +e.getMessage());
+            boolean created =file.createNewFile();
+            if (created) { AssertJUnit.assertFalse("CreatenewFile should be False for file with name: "+ strPath, created );}
+            else {
+                System.out.println("File is not created, createNewFile=false, without exception, filename:" +strPath);
+            }
+
+       } catch (IOException e) {
+           Assert.assertTrue(e.getLocalizedMessage().compareTo("The filename, directory name, or volume label syntax is incorrect")==0, "Какой то левый иксепшн, надо разбираться!");
+            System.out.println("File hasn't been created. The name is: "+strPath+" .Handled Exception: " + e.getMessage());
         }
-        System.out.println("File hasn't been created. The name is: "+strPath);
+
 
         file.deleteOnExit();
     }
@@ -83,12 +89,12 @@ public Path parentPath; // пасс к созданной временной д�
     @AfterClass
     public void deleteTEmpDir (){
         System.out.println(" Temporary directory, used for task3, createNewFile() function is "+ parentPath.toString());
-        try {
+    /*   try {
             Files.delete(parentPath);
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }  */
 
     }
 
